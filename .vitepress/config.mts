@@ -4,7 +4,10 @@ import { setSidebar } from './utils/auto-sidebar'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  head: [['link', { rel: 'icon', href: '/logo.svg' }],],
+  // 部署到 GitHub Pages 子路径
+  base: '/Baizhou-blog/',
+
+  head: [['link', { rel: 'icon', href: '/Baizhou-blog/logo.svg' }],],
   title: "Baizhou-blog",
   description: "A VitePress Site",
   themeConfig: {
@@ -19,7 +22,7 @@ export default defineConfig({
     ],
 
     sidebar: {
-      "/backend/java/": setSidebar("backend/java"),
+      "/backend/java/": setSidebar("backend/java", "/Baizhou-blog/"),
     },
 
     // sidebar: [

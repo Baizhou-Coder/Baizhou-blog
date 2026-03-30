@@ -4,4 +4,4 @@
 
 ## Java
 
-- [yudao-boot-mini vs ruoyi-vue-pro 后端对比分析](yudao-boot-mini%20vs%20ruoyi-vue-pro%20后端对比分析.md)
+- [yudao-boot-mini vs ruoyi-vue-pro 后端对比分析](yudao-boot-mini vs ruoyi-vue-pro 后端对比分析)

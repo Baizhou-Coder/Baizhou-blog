@@ -52,12 +52,14 @@ function difference<T>(arr1: T[], arr2: T[]): T[] {
  * @param fileNames 当前目录下的文件/文件夹名数组
  * @param absolutePath 当前目录的绝对路径（文件系统）
  * @param relativeUrlPath 当前目录对应的 URL 路径（相对于站点根目录，以 '/' 开头）
+ * @param basePath 部署基础路径（如 '/Baizhou-blog/'）
  * @returns 侧边栏项数组
  */
 function getSidebarItems(
     fileNames: string[],
     absolutePath: string,
-    relativeUrlPath: string
+    relativeUrlPath: string,
+    basePath: string
 ): SidebarItem[] {
     const items: SidebarItem[] = [];
 
@@ -70,7 +72,8 @@ function getSidebarItems(
             const subItems = getSidebarItems(
                 fs.readdirSync(fullPath),
                 fullPath,
-                path.posix.join(relativeUrlPath, fileName) // URL 路径用 posix 拼接
+                path.posix.join(relativeUrlPath, fileName),
+                basePath
             );
             items.push({
                 text: fileName,
@@ -84,10 +87,11 @@ function getSidebarItems(
 
             const nameWithoutExt = path.basename(fileName, '.md');
             const link = path.posix.join(relativeUrlPath, nameWithoutExt);
-            // 注意：VitePress 中链接通常需要以 '/' 开头，且不需要 .md 后缀
+            // 确保链接以 basePath 开头
+            const finalLink = link.startsWith('/') ? `${basePath.replace(/\/$/, '')}${link}` : `${basePath}${link}`;
             items.push({
                 text: nameWithoutExt,
-                link: link.startsWith('/') ? link : `/${link}`,
+                link: finalLink,
             });
         }
     }
@@ -98,9 +102,10 @@ function getSidebarItems(
 /**
  * 生成 VitePress 侧边栏配置
  * @param pathname 相对于项目根目录的路径（例如 '/docs' 或 'docs'），表示需要生成侧边栏的目录
+ * @param basePath 部署基础路径（可选，默认 '/'）
  * @returns 侧边栏配置数组，如果目录读取失败则返回空数组
  */
-export function setSidebar(pathname: string): SidebarItem[] {
+export function setSidebar(pathname: string, basePath: string = '/'): SidebarItem[] {
     // 将传入的路径转换为绝对路径（支持以 '/' 开头或不带）
     const normalizedPathname = pathname.replace(/^\/+/, '');
     const absoluteDir = path.join(DIR_PATH, normalizedPathname);
@@ -119,5 +124,5 @@ export function setSidebar(pathname: string): SidebarItem[] {
     // 构建 URL 基路径：确保以 '/' 开头
     const baseUrlPath = `/${normalizedPathname}`;
 
-    return getSidebarItems(filteredFiles, absoluteDir, baseUrlPath);
+    return getSidebarItems(filteredFiles, absoluteDir, baseUrlPath, basePath);
 }
