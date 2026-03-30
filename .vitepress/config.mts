@@ -13,7 +13,7 @@ export default defineConfig({
   themeConfig: {
     outlineTitle: '目录',
     outline: [2,6],
-    logo: './logo.svg',
+    logo: '/Baizhou-blog/logo.svg',
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: '主页', link: '/' },
