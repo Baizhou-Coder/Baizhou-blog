@@ -55,6 +55,7 @@ jobs:
       # 构建 VitePress 站点
       - name: Build with VitePress
         run: pnpm docs:build   # 确保 package.json 中有该脚本
+        touch .nojekyll  # 通知githubpages不要使用Jekyll处理这个站点，不知道为啥不生效，就手动搞了
 
       # 上传构建产物（默认输出目录）
       - name: Upload artifact
