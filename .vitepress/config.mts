@@ -22,7 +22,7 @@ export default defineConfig({
     ],
 
     sidebar: {
-      "/backend/java/": setSidebar("backend/java", "/Baizhou-blog/"),
+      "/backend/java/": setSidebar("backend/java"),
     },
 
     // sidebar: [
