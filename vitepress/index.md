@@ -4,4 +4,4 @@
 
 ## 文章列表
 
-- [VitePress 部署问题排查笔记](/vitepress/VitePress 部署问题排查笔记.html)
+- [VitePress 部署问题排查笔记](./VitePress%20部署问题排查笔记.md)
