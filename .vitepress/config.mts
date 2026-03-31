@@ -17,11 +17,12 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: '主页', link: '/' },
-      { text: '示例文档', link: '/markdown-examples' },
+      { text: 'VitePress', link: '/vitepress/' },
       { text: '后端', link: '/backend/java/'}
     ],
 
     sidebar: {
+      "/vitepress/": setSidebar("vitepress"),
       "/backend/java/": setSidebar("backend/java"),
     },
 
